@@ -1,0 +1,12 @@
+{
+    "builds":[{
+        "src": "src/wsgi.py",
+        "use": "@now/python",
+        "config": { "maxLambdaSize": "15mb", "runtime": "python3.10" }
+    }],
+    "routes":[
+        {
+            "src": "/(.*)",
+            "dest": "/src/wsgi.py"}
+    ]
+}

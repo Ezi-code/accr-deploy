@@ -1,0 +1,61 @@
+{% extends "app/index.html" %}
+
+{% block title %}
+  Categories
+{% endblock title %}
+
+
+{% block body %}
+  <main class="container">
+    <div class="row g-5">
+        <div class="col-md-8">
+          <h3 class="pb-4 mb-4 fst-italic border-bottom">
+            {{ category }}
+          </h3>
+          <div>
+            <ul class="list-unstyled">
+              {% for blog in blogs %}
+              <li>
+                <a class="d-flex flex-column flex-lg-row gap-3 align-items-start align-items-lg-center py-3 link-body-emphasis text-decoration-none border-top" href="{% url 'read_blog' blog.title %}">
+                  <img class="bd-placeholder-img" src="{{ blog.picture.url }}" width="100%" height="220" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false"/>
+                  <div class="col-lg-8">
+                    <h6 class="mb-0"><strong>{{ blog.title }}</strong></h6>
+                    <p>{{blog.description}}</p>
+                    <small class="text-body-secondary">{{ blog.date }}</small>
+                  </div>
+                </a>
+              </li>
+              {% empty %}
+                <h3>NO BLOG POSTS YET</h3>
+              {% endfor %}
+            </ul>
+          </div>
+        </div>
+    </div>
+  
+    
+    <div class="col-md-4">
+      <div class="position-sticky" style="top: 2rem;">
+        <div>
+          <h4 class="fst-italic">Recent posts</h4>
+          <ul class="list-unstyled">
+            {% for rescent in rescents %}
+            <li>
+              <a class="d-flex flex-column flex-lg-row gap-3 align-items-start align-items-lg-center py-3 
+                link-body-emphasis text-decoration-none border-top" href=" {% url 'read_blog' rescent.post.title %}"> 
+                <img class="bd-placeholder-img" src="{{ rescent.post.picture.url }}"
+                width="100%" height="96" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" 
+                preserveAspectRatio="xMidYMid slice" focusable="false" />
+                  <div class="col-lg-8">
+                  <h6 class="mb-0">{{ rescent.post.title }}</h6>
+                  <small class="text-body-secondary">{{ rescent.post.date }}</small>
+                </div>
+              </a>
+            </li>
+            {% endfor %}
+          </ul>
+        </div>
+      </div>
+    </div>
+  </main>
+{% endblock body %}

@@ -1,0 +1,51 @@
+{% extends 'app/index.html' %}
+
+
+{% block title %}
+	Read Blog
+{% endblock %}
+
+
+{% block body %}
+<main class="container">
+	<div class="row g-5 p-1">
+		<div class="col-md-8">
+		  {% if blog %}
+			<article class="blog-post">
+			  <h2 class="display-5 link-body-emphasis mb-1">{{blog.title}}</h2>
+			  <p class="blog-post-meta">{{ blog.date }}<a href="#">{{ blog.author }}</a></p>
+			  <img class="py-3" src="{{ blog.picture.url }}" width="100%" height="400px" alt="">
+			  <p>{{ blog.content|safe }}</p>
+			</article>
+			<hr class="py-3">
+	
+		  {% endif %}
+	
+		</div>
+	
+		<div class="col-md-4">
+		  <div class="position-sticky" style="top: 2rem;">        
+			
+			<div>
+			  <h5 class="fst-italic">Recent posts</h5>
+			  <ul class="list-unstyled">
+				{% for rescent in rescents %}
+				<li>
+				  <a class="d-flex flex-column flex-lg-row gap-3 align-items-start align-items-lg-center py-3 link-body-emphasis text-decoration-none border-top" href=" {% url 'read_blog' rescent.post.title %}">
+					<img class="bd-placeholder-img" src="{{ rescent.post.picture.url }}" width="100%" height="96" xmlns="http://www.w3.org/2000/svg"  preserveAspectRatio="xMidYMid slice" focusable="false" />
+					<div class="col-lg-8">
+					  <h6 class="mb-0">{{ rescent.post.title }}</h6>
+					  <p>{{ rescent.post.description}}</p>
+					  <small class="text-body-secondary">{{ rescent.post.date }}</small>
+					</div>
+				  </a>
+				</li>
+				{% endfor %}
+			  </ul>
+			</div>
+		  </div>
+		</div>
+	  </div>
+</main>
+
+{% endblock %}
